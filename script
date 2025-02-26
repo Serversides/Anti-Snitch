@@ -1,0 +1,30 @@
+-- // ANTI-SNITCH SCRIPT FOR SERVERSIDES \\ --
+-- // PUBLIC SOURCE SCRIPT MADE BY FESTIVE \\ --
+
+local whitelisted_only = false -- // ONLY KICKS WHITELISTED PEOPLE OR NOT \\ --
+local group_id = string        -- // GROUP ID NUMBER \\ --
+local words = {
+	"backdoor",
+	"serverside",
+	"server-side",
+	"server side",
+	"serversided",
+	"zorgon",
+	"virus",
+	"infect",
+	"infected"
+}
+
+game.Players.PlayerAdded:Connect(function(plr)
+	plr.Chatted:Connect(function(msg)
+		for _,v in ipairs(words) do
+			if string.find(v, msg:lower()) and whitelisted_only == true then
+				if plr:IsInGroup(group_id) then
+					plr:Kick()
+				end
+			elseif string.find(v, msg:lower()) and whitelisted_only == false then
+				plr:Kick()
+			end
+		end
+	end)
+end)
